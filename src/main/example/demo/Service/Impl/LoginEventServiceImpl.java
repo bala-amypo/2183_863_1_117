@@ -1,50 +1,39 @@
+
 package com.example.demo.service.impl;
 
 import com.example.demo.entity.LoginEvent;
+import com.example.demo.exception.BadRequestException;
 import com.example.demo.repository.LoginEventRepository;
 import com.example.demo.service.LoginEventService;
-import com.example.demo.util.RuleEvaluationUtil;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
-
+import org.springframework.stereotype.Service;
 @Service
 public class LoginEventServiceImpl implements LoginEventService {
 
-    private final LoginEventRepository repo;
-    private final RuleEvaluationUtil ruleUtil;
+    private final LoginEventRepository loginRepo;
 
-   
-    public LoginEventServiceImpl(LoginEventRepository repo,
-                                 RuleEvaluationUtil ruleUtil) {
-        this.repo = repo;
-        this.ruleUtil = ruleUtil;
+    public LoginEventServiceImpl(LoginEventRepository loginRepo) {
+        this.loginRepo = loginRepo;
+    
     }
 
-    @Override
     public LoginEvent recordLogin(LoginEvent event) {
+        if (event.getIpAddress() == null || event.getDeviceId() == null)
+            throw new BadRequestException("IP and Device ID required");
 
-        if (event.getIpAddress() == null || event.getDeviceId() == null) {
-            throw new IllegalArgumentException("IP and Device required");
-        }
-
-        LoginEvent saved = repo.save(event);
-        ruleUtil.evaluateLoginEvent(saved);
+        LoginEvent saved = loginRepo.save(event);
         return saved;
     }
 
-    @Override
     public List<LoginEvent> getEventsByUser(Long userId) {
-        return repo.findByUserId(userId);
+        return loginRepo.findByUserId(userId);
     }
 
-    @Override
     public List<LoginEvent> getSuspiciousLogins(Long userId) {
-        return repo.findByUserIdAndLoginStatus(userId, "FAILED");
+        return loginRepo.findByUserIdAndLoginStatus(userId, "FAILED");
     }
 
-    @Override
     public List<LoginEvent> getAllEvents() {
-        return repo.findAll();
+        return loginRepo.findAll();
     }
 }
