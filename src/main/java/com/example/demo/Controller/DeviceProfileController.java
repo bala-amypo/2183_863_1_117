@@ -1,31 +1,49 @@
+package com.example.demo.controller;
+
+import com.example.demo.entity.DeviceProfile;
+import com.example.demo.service.DeviceProfileService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 @RestController
-@RequestMapping("/api/users")
-public class UserAccountController {
+@RequestMapping("/api/devices")
+public class DeviceProfileController {
 
-    private final UserAccountService service;
+    private final DeviceProfileService service;
 
-    public UserAccountController(UserAccountService service) {
+    public DeviceProfileController(DeviceProfileService service) {
         this.service = service;
     }
 
+    // CREATE device
     @PostMapping
-    public UserAccount create(@RequestBody UserAccount user) {
-        return service.createUser(user);
+    public DeviceProfile create(@RequestBody DeviceProfile deviceProfile) {
+        return service.createDevice(deviceProfile);
     }
 
+    // GET device by ID
     @GetMapping("/{id}")
-    public UserAccount get(@PathVariable Long id) {
-        return service.getUserById(id);
+    public DeviceProfile getById(@PathVariable Long id) {
+        return service.getDeviceById(id);
     }
 
-    @PutMapping("/{id}/status")
-    public UserAccount updateStatus(@PathVariable Long id,
-                                    @RequestParam String status) {
-        return service.updateUserStatus(id, status);
+    // UPDATE device
+    @PutMapping("/{id}")
+    public DeviceProfile update(@PathVariable Long id,
+                                @RequestBody DeviceProfile deviceProfile) {
+        return service.updateDevice(id, deviceProfile);
     }
 
+    // DELETE device
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        service.deleteDevice(id);
+    }
+
+    // GET all devices
     @GetMapping
-    public List<UserAccount> getAll() {
-        return service.getAllUsers();
+    public List<DeviceProfile> getAll() {
+        return service.getAllDevices();
     }
 }
