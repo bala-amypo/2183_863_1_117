@@ -1,4 +1,5 @@
-package com.example.demo.controller;
+
+ package com.example.demo.controller;
 
 import com.example.demo.entity.PolicyRule;
 import com.example.demo.service.PolicyRuleService;
@@ -10,35 +11,29 @@ import java.util.List;
 @RequestMapping("/api/rules")
 public class PolicyRuleController {
 
-    private final PolicyRuleService service;
+    PolicyRuleService ruleService;  
 
-    // ✅ Constructor injection (MANDATORY)
-    public PolicyRuleController(PolicyRuleService service) {
-        this.service = service;
+    public PolicyRuleController(PolicyRuleService ruleService) {
+        this.ruleService = ruleService;
     }
 
-    // POST /api/rules
     @PostMapping
-    public PolicyRule createRule(@RequestBody PolicyRule rule) {
-        return service.createRule(rule);
+    public PolicyRule create(@RequestBody PolicyRule rule) {
+        return ruleService.createRule(rule);
     }
 
-    // PUT /api/rules/{id}
     @PutMapping("/{id}")
-    public PolicyRule updateRule(@PathVariable Long id,
-                                 @RequestBody PolicyRule rule) {
-        return service.updateRule(id, rule);
+    public PolicyRule update(@PathVariable Long id, @RequestBody PolicyRule rule) {
+        return ruleService.updateRule(id, rule);
     }
 
-    // GET /api/rules/active
     @GetMapping("/active")
-    public List<PolicyRule> getActiveRules() {
-        return service.getActiveRules();
+    public List<PolicyRule> getActive() {
+        return ruleService.getActiveRules();
     }
 
-    // GET /api/rules
     @GetMapping
-    public List<PolicyRule> getAllRules() {
-        return service.getAllRules();
+    public List<PolicyRule> getAll() {
+        return ruleService.getAllRules();
     }
 }
