@@ -11,6 +11,6 @@ public class RuleEvaluationUtil {
     }
 
     public void evaluateLoginEvent(LoginEvent event) {
-        // Tests only check invocation
+       
     }
 }

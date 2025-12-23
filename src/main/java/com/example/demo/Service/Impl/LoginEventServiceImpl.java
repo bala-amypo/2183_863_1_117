@@ -14,7 +14,7 @@ public class LoginEventServiceImpl implements LoginEventService {
     private final LoginEventRepository repo;
     private final RuleEvaluationUtil ruleUtil;
 
-    // ✅ REQUIRED CONSTRUCTOR SIGNATURE
+   
     public LoginEventServiceImpl(LoginEventRepository repo,
                                  RuleEvaluationUtil ruleUtil) {
         this.repo = repo;

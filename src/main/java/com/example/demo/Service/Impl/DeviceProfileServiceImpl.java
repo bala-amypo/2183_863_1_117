@@ -15,7 +15,7 @@ public class DeviceProfileServiceImpl implements DeviceProfileService {
 
     private final DeviceProfileRepository repo;
 
-    // ✅ REQUIRED CONSTRUCTOR SIGNATURE
+    
     public DeviceProfileServiceImpl(DeviceProfileRepository repo) {
         this.repo = repo;
     }

@@ -13,7 +13,7 @@ public class ViolationRecordServiceImpl implements ViolationRecordService {
 
     private final ViolationRecordRepository repo;
 
-    // ✅ REQUIRED CONSTRUCTOR SIGNATURE
+    
     public ViolationRecordServiceImpl(ViolationRecordRepository repo) {
         this.repo = repo;
     }

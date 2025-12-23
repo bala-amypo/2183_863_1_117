@@ -16,7 +16,7 @@ public class UserAccountServiceImpl implements UserAccountService {
     private final UserAccountRepository userRepo;
     private final PasswordEncoder encoder;
 
-    // ✅ REQUIRED CONSTRUCTOR SIGNATURE
+    
     public UserAccountServiceImpl(UserAccountRepository userRepo,
                                   PasswordEncoder encoder) {
         this.userRepo = userRepo;
