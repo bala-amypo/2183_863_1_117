@@ -1,11 +1,10 @@
-
 package com.example.demo.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.demo.entity.LoginEvent;
 import java.util.List;
 
-public interface LoginEventRepository extends JpaRepository<LoginEvent, Long> {
+public interface LoginEventRepository {
+    LoginEvent save(LoginEvent event);
     List<LoginEvent> findByUserId(Long userId);
     List<LoginEvent> findByUserIdAndLoginStatus(Long userId, String status);
 }
