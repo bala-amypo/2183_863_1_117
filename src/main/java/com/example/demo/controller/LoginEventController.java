@@ -1,20 +1,3 @@
-@RestController
-@RequestMapping("/api/logins")
-public class LoginEventController {
-
-    private final LoginEventService service;
-
-    public LoginEventController(LoginEventService service) {
-        this.service = service;
-    }
-
-    @PostMapping("/record")
-    public LoginEvent record(@RequestBody LoginEvent event) {
-        return service.recordLogin(event);
-    }
-
-    @GetMapping("/user/{userId}")
-    public List<LoginEvent> byUser
 package com.example.demo.controller;
 
 import com.example.demo.entity.LoginEvent;
